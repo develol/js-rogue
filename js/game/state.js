@@ -2,16 +2,16 @@ class State {
     #id;
     #stateGame
     
-	// ЭЛЕМЕНТЫ 
+	// ELEMENTS 
 	#elMainMenu = $('#main-menu');
 	#elMainMenu1 = $('#main-menu-1');
 	#elMainMenu2 = $('#main-menu-2');
 	
-    constructor(id) { // КОНСТРУКТОР
+    constructor(id) { // CONSTRUCTOR
         this.#id = id;
     }
     
-	checkState(persons) { // ПРОВЕРКА СОСТОЯНИЯ
+	checkState(persons) { // CHECKING THE STATUS
 		var countLife = 0, i;
         for (i = 0; i < persons.length; i++) {
 			if (i === this.#id) {
@@ -35,7 +35,7 @@ class State {
 		return this.#stateGame;
 	}
 
-	#releaseState() { // ПРИМЕНЕНИЕ СОСТОЯНИЯ
+	#releaseState() { // STATE APPLICATION
 		this.#elMainMenu.css('display', 'block');
 		switch(this.#stateGame) {
 			case 1:

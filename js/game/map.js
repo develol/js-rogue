@@ -5,24 +5,24 @@ class Map {
     #types  = ['tileW', 'tileP', 'tileE', 'tileSW', 'tileHP'];
     #random = new Random();
 
-    constructor(sizeX, sizeY) { // КОНСТРУКТОР
+    constructor(sizeX, sizeY) { // CONSTRUCTOR
         this.#sizeX = sizeX;
         this.#sizeY = sizeY;
     }
     
-    getSizeX() { // ГЕТТЕР РАЗМЕРА ПО Х
+    getSizeX() { // GETTER SIZE BY X
         return this.#sizeX;
     }
     
-    getSizeY() { // ГЕТТЕР РАЗМЕРА ПО Y
+    getSizeY() { // GETTER SIZE BY Y
         return this.#sizeY;
     }
     
-    getMap() { // ГЕТТЕР МАССИВА КАРТЫ
+    getMap() { // GETTER OF THE MAP ARRAY
         return this.#map;
     }
     
-    createMap(minSassage, maxSassage, tileSize) { // СОЗДАНИЕ КАРТЫ
+    createMap(minSassage, maxSassage, tileSize) { // CREATING A MAP
         var x, y, i;
         var wall,
             countSassageX = Math.floor(this.#sizeX / (this.#random.integer(minSassage, maxSassage))),
@@ -53,7 +53,7 @@ class Map {
         }        
     }
     
-    createRooms(minRoomSize, maxRoomSize, minRoomCount, maxRoomCount) { // СОЗДАНИЕ КОМНАТ
+    createRooms(minRoomSize, maxRoomSize, minRoomCount, maxRoomCount) { // CREATING ROOMS
         var x, y, i;
         var roomCount = this.#random.integer(minRoomCount, maxRoomCount),
 			roomSizeX,
@@ -73,7 +73,7 @@ class Map {
         }        
     }
 
-    changeTile(x, y, type) { // УСТАНОВКА КЛЕТКИ
+    changeTile(x, y, type) { // INSTALLING THE CAGE
         this.#map[x][y] = type;
         $('#tile_' + x + '_' + y).removeClass();
         $('#tile_' + x + '_' + y).addClass('tile');
@@ -82,7 +82,7 @@ class Map {
         }
     }
     
-    movingTile(oldX, oldY, newX, newY) { // ПЕРЕМЕЩЕНИЕ КЛЕТКИ
+    movingTile(oldX, oldY, newX, newY) { // MOVING THE CELL
         this.#map[newX][newY] = this.#map[oldX][oldY];
         $('#tile_' + (newX) + '_' + (newY)).html(
             $('#tile_' + (oldX) + '_' + (oldY)).html()
@@ -93,7 +93,7 @@ class Map {
         this.changeTile(newX, newY, this.#map[newX][newY]);
     }
     
-    randomTile() { // ПОЛУЧЕНИЕ СЛУЧАЙНОЙ СВОБОДНОЙ КЛЕТКИ
+    randomTile() { // GETTING A RANDOM FREE CELL
         var x, y;
         x = this.#random.integer(0, this.#sizeX - 1);
         y = this.#random.integer(0, this.#sizeY - 1);

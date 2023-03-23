@@ -6,41 +6,41 @@ class Person {
     #cls;
     
     #map;
-	#baseHealth = 100; // базавое здоровье
-	#baseWeapon = 10; // базавая атака
-	#imbaWeapon = this.#baseWeapon * 2; // атака с мечом
+	#baseHealth = 100; // basic health
+	#baseWeapon = 10; // basic attack
+	#imbaWeapon = this.#baseWeapon * 2; // sword attack
     
     #audioHP    = new Audio('./audio/hp.mp3');
     #audioImba  = new Audio('./audio/imba.mp3');
     #audioAtack = new Audio('./audio/atack.mp3');
     #audioDeath = new Audio('./audio/death.mp3');
     
-    constructor(map, cls) { // КОНСТРУКТОР
+    constructor(map, cls) { // CONSTRUCTOR
         this.#map = map;
         this.personCreate(cls);
     }   
     
-    getX() { // ГЕТТЕР Х-КОАРДИНАТЫ
+    getX() { // GETTER X-COORDINATES
         return this.#x;
     }
     
-    getY() { // ГЕТТЕР Y-КОАРДИНАТЫ
+    getY() { // GETTER Y-COORDINATES
         return this.#y;
     }
     
-    getHP() { // ГЕТТЕР ЗДОРОВЬЯ
+    getHP() { // HEALTH GETTER
         return this.#hp;
     }
     
-    getWP() { // ГЕТТЕР АТАКИ
+    getWP() { // GETTER ATTACKS
         return this.#wp;
     }
     
-    getCls() { // ГЕТТЕР КЛАССА
+    getCls() { // CLASS GETTER
         return this.#cls;
     }
     
-	personCreate(cls) { // СОЗДАНИЕ АКТЕРОВ
+	personCreate(cls) { // CREATING ACTORS
 		var personXY = this.#map.randomTile();
         this.#x = personXY[0];
         this.#y = personXY[1];
@@ -50,7 +50,7 @@ class Person {
         this.changeWP(this.#baseWeapon);
 	}  
 	
-    changeHP(hp) { // УСТАНОВКА ЗДОРОВЬЯ
+    changeHP(hp) { // SETTING HEALTH
         if (hp < 1) {
             this.#hp = 0;
             this.#wp = 0;
@@ -69,7 +69,7 @@ class Person {
         }
     }
 
-    changeWP(wp) { // УСТАНОВКА АТАКИ
+    changeWP(wp) { // SETTING UP AN ATTACK
         if(typeof this.#wp !== 'undefined'){
             if(this.#wp < wp){
                 this.#audioImba.play();
@@ -79,7 +79,7 @@ class Person {
 		this.#personBar();
     }
     
-	#personBar() { // ОБНОВЛЕНИЕ БАРА ЗДОРОВЬЯ
+	#personBar() { // HEALTH BAR UPDATE
 		$('#tile_' + this.#x + '_' + this.#y).html('');
 		var imba = '';
 		if(this.#wp > this.#baseWeapon){
@@ -91,7 +91,7 @@ class Person {
           .appendTo('#tile_' + this.#x + '_' + this.#y);
 	}
 	
-    personMoving(x, y) { // ПЕРЕМЕЩЕНИЕ ПЕРСОНАЖА
+    personMoving(x, y) { // MOVING A CHARACTER
         if (this.#hp > 0) {
 			var preStepType;
 			if (this.#x + x < 0) {
@@ -143,7 +143,7 @@ class Person {
         return false;
     }
     
-    personAttack(persons, id) { // АТАКА ПЕРСОНАЖА
+    personAttack(persons, id) { // CHARACTER ATTACK
         var x, y, i, 
             atack = false;
         if (this.#hp > 0) {

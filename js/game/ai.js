@@ -1,7 +1,7 @@
 class AI {
     #random = new Random();
     
-    #movingAI(person, player) { // ПЕРЕМЕЩЕНИЕ ВРАГА (ИИ)
+    #movingAI(person, player) { // MOVING THE ENEMY (AI)
         var x = 0,
 			y = 0;
         if (player.getX() < person.getX()) {x = -1;}
@@ -13,7 +13,7 @@ class AI {
         }
     }
 
-    stepAI(persons, player) { // ШАГ ВРАГОВ (ИИ)
+    stepAI(persons, player) { // STEP ENEMIES (AI)
         var i;
         for (i = 0; i < persons.length; i++) {
 			if (persons[i].getCls() != 2) {

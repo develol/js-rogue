@@ -1,11 +1,11 @@
 class Game {
 	#koef = 1;
     
-    constructor(koef) { // КЛАСС
+    constructor(koef) { // CONSTRUCTOR
         this.#koef = koef;
     }
     
-    // ЭКЗЕМПЛЯРЫ КЛАССОВ
+    // INSTANCES OF CLASSES
     #AI;
     #map;
     #item;
@@ -13,26 +13,26 @@ class Game {
     #random;
     #persons;
     
-	// КОНФИГУРАЦИЯ
-    #sizeX; // количество клеток по X
-    #sizeY; // количество клеток по Y
-	#tileSize; // размер клетки
-	#enemyCount; // количество врагов
-	#swordCount; // количество мечей
-	#minSassage; // мин. кол-во проходов
-	#maxSassage; // макс. кол-во проходов
-	#minRoomSize; // мин. размер комнаты
-	#maxRoomSize; // макс. размер комнаты
-	#minRoomCount; // мин. кол-во комнат
-	#maxRoomCount; // макс. кол-во комнат
-	#healthpointCount; // количество зелий
-	#playerId; // Идентификатор игрока
+	// CONFIGURATION
+    #sizeX; // number of cells by X
+    #sizeY; // number of cells by Y
+	#tileSize; // cell size
+	#enemyCount; // number of enemies
+	#swordCount; // number of swords
+	#minSassage; // min. number of roads
+	#maxSassage; // max. number of roads
+	#minRoomSize; // min. room size
+	#maxRoomSize; // max. room size
+	#minRoomCount; // min. number of rooms
+	#maxRoomCount; // max. number of rooms
+	#healthpointCount; // number of potions
+	#playerId; // player ID
 
-	// ЭЛЕМЕНТЫ 
+	// ELEMENTS 
 	#elGameMap = $('#game-map');
 	#elTileStyle = $('#tile-style');
 	
-    init() { // ИНИЦИАЛИЗАЦИЯ
+    init() { // INITIALIZATION
         this.#persons = [];
         this.#playerId = 0;
     	this.#tileSize = 32 / this.#koef;
@@ -67,59 +67,59 @@ class Game {
 		$('.menu .elem').css('display', 'none');
 		$('body').css('background-size', this.#tileSize+'px')
 		
-		this.#map.createMap( // СОЗДАНИЕ КАРТЫ
+		this.#map.createMap( // CREATING A MAP
 		    this.#minSassage, 
 		    this.#maxSassage, 
 		    this.#tileSize
 		);
 		
-		this.#map.createRooms( // СОЗДАНИЕ КОМНАТ
+		this.#map.createRooms( // CREATING ROOMS
 		    this.#minRoomSize, 
 		    this.#maxRoomSize, 
 		    this.#minRoomCount, 
 		    this.#maxRoomCount
 		);
         
-        this.#persons[this.#playerId] = new Person(this.#map, 2); // СОЗДАНИЕ ИГРОКА
+        this.#persons[this.#playerId] = new Person(this.#map, 2); // CREATING A PLAYER
         
-        for (var i = 0; i < this.#enemyCount; i++) { // СОЗДАНИЕ ВРАГОВ
+        for (var i = 0; i < this.#enemyCount; i++) { // CREATING ENEMIES
 			this.#persons[i+1] = new Person(this.#map, 3);
         }
         
-        for (var i = 0; i < this.#swordCount; i++) { // СОЗДАНИЕ МЕЧЕЙ
+        for (var i = 0; i < this.#swordCount; i++) { // CREATING SWORDS
             this.#item.createItemOnMap(this.#map, 4);
         }
 		
-        for (var i = 0; i < this.#healthpointCount; i++) { // СОЗДАНИЕ ЗЕЛИЙ
+        for (var i = 0; i < this.#healthpointCount; i++) { // CREATING POTIONS
             this.#item.createItemOnMap(this.#map, 5);
         }
     }
 
-    playerAttack() { // АТАКА ИГРОКА
+    playerAttack() { // PLAYER ATTACK
         this.#persons[this.#playerId].personAttack(this.#persons, this.#playerId);
     }
 
-    playerUp() { // ШАГ ИГРОКА ВВЕРХ
+    playerUp() { // PLAYER'S STEP UP
         this.#persons[this.#playerId].personMoving(0, -1);
     }
 
-    playerDown() { // ШАГ ИГРОКА ВНИЗ
+    playerDown() { // PLAYER'S STEP DOWN
         this.#persons[this.#playerId].personMoving(0, 1);
     }
 
-    playerLeft() { // ШАГ ИГРОКА ВЛЕВО
+    playerLeft() { // PLAYER'S STEP LEFT
         this.#persons[this.#playerId].personMoving(-1, 0);
     }
 
-    playerRight() { // ШАГ ИГРОКА ВПРАВО
+    playerRight() { // PLAYER'S STEP RIGHT
         this.#persons[this.#playerId].personMoving(1, 0);
     }
 
-    stepAI() { // ШАГ ВРАГОВ (ИИ)
+    stepAI() { // STEP ENEMIES (AI)
         this.#AI.stepAI(this.#persons, this.#playerId);
     }
 
-    checkState() { // ПРОВЕРКА СОСТОЯНИЯ
+    checkState() { // CHECKING THE STATUS
         this.#state.checkState(this.#persons);
     }
 }
