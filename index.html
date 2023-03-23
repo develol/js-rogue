@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+	    <title>Rogue</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i|Tinos:400,400i&amp;subset=cyrillic" rel="stylesheet">
+		<script type="text/javascript" src="./js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="./js/game/ai.js"></script>
+        <script type="text/javascript" src="./js/game/game.js"></script>
+        <script type="text/javascript" src="./js/game/item.js"></script>
+        <script type="text/javascript" src="./js/game/map.js"></script>
+        <script type="text/javascript" src="./js/game/person.js"></script>
+        <script type="text/javascript" src="./js/game/random.js"></script>
+        <script type="text/javascript" src="./js/game/state.js"></script>
+        <link rel="stylesheet" href="./css/index.css"/>
+		<style id="tile-style" type="text/css">
+			.field .tile { 
+				width: 50px;
+				height: 50px;
+			}			
+		</style>
+	</head>
+	<body>
+		<div class="field-box">
+			<svg class="tuch-buttons" viewbox="0 0 100 100">
+			  <g>
+				<polygon id="player-up-btn" points="0,0 100,0 50,50" />
+				<polygon id="player-right-btn" points="100,0 50,50 75,75 100,100" />
+				<polygon id="player-down-btn" points="0,100 50,50 75,75 100,100" />
+				<polygon id="player-left-btn" points="0,0 25,25 50,50 0,100" />
+			  </g>
+			</svg>
+			<div class="window menu" id="main-menu">
+				<div class="elem" id="main-menu-0">
+					<h1>ROGUE</h1>
+					<h3>
+					    <input type="checkbox" id="game-param-map" name="game-param-map"/>
+					    <label for="game-param-map"> Большая карта</label>
+					</h3>
+					<h3>
+					    <input type="checkbox" id="game-param-lvl" name="game-param-lvl"/>
+					    <label for="game-param-lvl"> Повышенная сложность</label>
+					</h3>
+					<br>
+					<h2 class="start-game-btn">Нажмите для старта</h2>
+				</div>
+				<div class="elem red" id="main-menu-1">
+					<h1>Вы проиграли!</h1>
+					<h2 class="restart-game-btn">Нажмите для рестарта</h2>
+				</div>
+				<div class="elem green" id="main-menu-2">
+					<h1>Вы выиграли!</h1>
+					<h2 class="restart-game-btn">Нажмите для рестарта</h2>
+				</div>
+			</div>
+			<div class="window field" id="game-map">
+			</div>
+		</div>
+		<script>
+			var level = 600;
+			var koef  = 1;
+            var game;
+
+			$('#player-up-btn').attr('onclick', 'game.playerUp(); game.playerAttack();');
+			$('#player-right-btn').attr('onclick', 'game.playerRight(); game.playerAttack();');
+			$('#player-down-btn').attr('onclick', 'game.playerDown(); game.playerAttack();');
+			$('#player-left-btn').attr('onclick', 'game.playerLeft(); game.playerAttack();');
+			$('.restart-game-btn').attr('onclick', 'restartGame();');
+			$('.start-game-btn').attr('onclick', 'startGame();');
+			
+			function startGame(){
+			    if ($('#game-param-lvl').prop('checked')){
+                	level = 400;
+                } else {
+                	level = 800;
+                }
+                
+			    if ($('#game-param-map').prop('checked')){
+                	koef = 2;
+                } else {
+                	koef = 1;
+                }
+                
+				game = new Game(koef);	
+                game.init();
+                
+    			setInterval(() => {
+    				game.stepAI();
+    			}, level);	
+    
+    			setInterval(() => {
+    				game.checkState();
+    			}, 250);
+    			
+    			addEventListener("keydown", (event) => {
+    				if (
+    				    (event.which === 87) ||
+    				    (event.which === 38)
+    				) {
+    					game.playerUp();
+    				}
+    				if (
+    				    (event.which === 83) || 
+    				    (event.which === 40)
+    				) {
+    					game.playerDown();
+    				}
+    				if (
+    				    (event.which === 65) ||
+    				    (event.which === 37)
+    				) {
+    					game.playerLeft();
+    				}
+    				if (
+    				    (event.which === 68) || 
+    				    (event.which === 39) 
+    				) {
+    					game.playerRight();
+    				}
+    				if (event.which === 32) {
+    					game.playerAttack();
+    				}
+    			});
+			}		
+			
+			function restartGame(){
+				game.init();	
+			}
+		</script>
+	</body>
+</html>

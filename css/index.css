@@ -1,0 +1,141 @@
+* {
+	box-sizing: border-box;
+}
+
+body, html {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+body {
+	background-color: #000000;
+	color: #ffffff;
+	margin: 0px;
+	background-image: url(images/tile-.png);
+	background-repeat: repeat;
+	background-size: 32px;
+	position: relative;
+}
+
+h1 {
+	font-family: "Playfair Display";
+	font-size: 30px;
+	padding: 10px 0px;
+	margin: 0px;
+}
+
+.field-box {
+	float: left;
+}
+
+.window {
+	width: 100vw;
+	height: 100vh;
+}
+
+.field {
+	position: relative;
+}
+
+.field .tile {
+	position: absolute;
+	background-size: 100%;
+	background-image: url(images/tile-.png);
+	z-index: 5;
+}
+
+.field .tileW {
+	background-image: url(images/tile-W.png);
+}
+
+.field .tileE {
+	background-image: url(images/tile-E.png);
+	z-index: 10;
+}
+
+.field .tileP {
+	background-image: url(images/tile-P.png);
+	z-index: 10;
+}
+
+.field .tileHP {
+	background-image: url(images/tile-HP.png);
+	z-index: 9;
+}
+
+.field .tileSW {
+	background-image: url(images/tile-SW.png);
+	z-index: 9;
+}
+
+.field .tile .health {
+	background-color: #ff0000;
+	z-index: 11;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 3px;
+}
+
+.field .tileP .health {
+	background-color: #00ff00;
+	z-index: 11;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 3px;
+}
+
+.menu {
+	background: rgba(0,0,0,0.8);
+	position: absolute;
+	z-index: 100;
+}
+
+.menu .elem {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	padding: 2%;
+}
+
+.menu .elem h2 {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.menu .elem.red h1 {
+	color: red;
+}
+
+.menu .elem.green h1 {
+	color: green;
+}
+
+.health.imba {
+	box-shadow: 0 0 10px yellow;
+}
+
+.tuch-buttons {
+	display: block;
+	width: calc(100vw + 100vh);
+	height: calc(100vw + 100vh);
+	position: absolute;
+	z-index: 99;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0.1;
+}
+
+.tuch-buttons g polygon:active {
+	fill: orange;
+}
+
+#main-menu-0 {
+	display: block;
+}
