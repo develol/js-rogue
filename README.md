@@ -1,6 +1,6 @@
 # js-rogue
 [JavaScript] Browser game [Rogue](https://en.wikipedia.org/wiki/Rogue_(video_game)) (keyboard + touchscreen)\
-**[Example](https://deve.lol/www/rogue2/)**
+**[Example](https://php.deve.lol/rogue2/)**
 
 ***JQuery v3.6.4+***
 
